@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
+import TShirt from "./TShirt";
 
 const initialLines = [
-  "I was a theater kid",
-  "and now I'm a",
-  "designer",
-  "who's older than my",
-  "coworkers",
-  "and they don't totally get my",
-  "jokes",
-  "but people like my",
-  "cat pictures on",
-  "Instagram"
+  "I'm not just a",
+  "father",
+  "to an amazing",
+  "daughter",
+  "I'm also a",
+  "Veteran",
+  "who did four tours",
+  "in Iraq",
+  "and I have",
+  "Chronic Diarrhea"
 ];
 
 const Wrapper = styled(Box)`
@@ -22,18 +23,16 @@ const Wrapper = styled(Box)`
   transform: translate3d(-50%, -50%, 0);
 `;
 
-const Text = styled.div`
-  text-align: center;
+const Even = styled(Text)`
+  font-family: "Rye", cursive;
+  font-size: 2em;
+  text-transform: uppercase;
 `;
 
 const Odd = styled(Text)`
-  font-family: "Vast Shadow", cursive;
-  font-size: 2em;
-`;
-
-const Even = styled(Text)`
-  font-family: "Bangers", cursive;
-  font-size: 4em;
+  font-family: "Lilita One", cursive;
+  font-size: 5em;
+  text-transform: uppercase;
 `;
 
 function App() {
@@ -41,13 +40,11 @@ function App() {
 
   return (
     <Wrapper p={3} width="75vw">
-      {lines.map((line, i) => (
-        <Flex key={i}>
-          <Box width={3 / 4} pr={3}>
-            {i % 2 === 0 ? <Even>{line}</Even> : <Odd>{line}</Odd>}
-          </Box>
-          <Box width={1 / 4}>
+      <Flex>
+        <Box width={1 / 4} mr={6}>
+          {lines.map((line, i) => (
             <input
+              key={i}
               type="text"
               defaultValue={line}
               onChange={event => {
@@ -56,9 +53,20 @@ function App() {
                 setLines([...newLines]);
               }}
             />
-          </Box>
-        </Flex>
-      ))}
+          ))}
+        </Box>
+        <TShirt width={1 / 2} p={5} pt={6}>
+          {lines.map((line, i) => (
+            <Box>
+              {i % 2 === 0 ? (
+                <Even textAlign="center">{line}</Even>
+              ) : (
+                <Odd textAlign="center">{line}</Odd>
+              )}
+            </Box>
+          ))}
+        </TShirt>
+      </Flex>
     </Wrapper>
   );
 }
